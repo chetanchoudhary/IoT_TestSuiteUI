@@ -1,0 +1,36 @@
+<div class="card">
+  <clr-alert *ngIf="message !== undefined" [clrAlertType]="'success'">
+    <clr-alert-item>
+      <span class="alert-text">
+        {{  message  }}
+      </span>
+    </clr-alert-item>
+  </clr-alert>
+  <div class="card-block">
+    <h2 class="card-title"><strong>{{ loadedSensor.name }}</strong> </h2>
+    <p class="card-text">
+      This sensor is connected to {{ loadedSensor.cloud }} cloud.
+    </p>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item"><b (click)="frequencyModalVisibility = true">Frequency: </b> {{loadedSensor.frequency}}
+    </li>
+    <li class="list-group-item"><b (click)="timeIntervalModalVisibility = true">Time Interval: </b>
+      {{loadedSensor.timeInterval}} seconds.</li>
+    <li class="list-group-item"><b (click)="rangeModalVisibility = true">Range: </b>
+      {{loadedSensor.minRange + " - " + loadedSensor.maxRange }}</li>
+  </ul>
+  <div class="card-footer">
+    <button *ngIf="spinnerVisibility === false" class="btn  btn-success" (click)="simulate()">Simulate</button>
+    <div *ngIf="spinnerVisibility === true">
+      <span class="spinner spinner-inline spinner-md">loading...</span>
+      <span>Simulating...</span>
+    </div>
+    <button class="btn  btn-danger" (click)="deleteSensor()">Delete</button>
+  </div>
+</div>
+<app-update-frequency [modalVisibility]="frequencyModalVisibility" (toggleModal)="frequencyToggleModal($event)">
+</app-update-frequency>
+<app-update-time-interval [modalVisibility]="timeIntervalModalVisibility"
+  (toggleModal)="timeIntervalToggleModal($event)"></app-update-time-interval>
+<app-update-range [modalVisibility]="rangeModalVisibility" (toggleModal)="rangeToggleModal($event)"></app-update-range>

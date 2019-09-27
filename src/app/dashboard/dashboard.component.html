@@ -1,0 +1,47 @@
+<clr-alert *ngIf="message !== undefined" [clrAlertType]="'success'">
+  <clr-alert-item>
+    <span class="alert-text">
+      {{  message  }}
+    </span>
+  </clr-alert-item>
+</clr-alert>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Cloud</th>
+      <th>Format</th>
+      <th>Time Interval</th>
+      <th>Frequency</th>
+      <th>Value Range</th>
+      <th>View/Update</th>
+      <th>Simulation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sensor of loadedSensors">
+      <td>{{ sensor.id }}</td>
+      <td>{{ sensor.name }}</td>
+      <td>{{ sensor.cloud }}</td>
+      <td>{{sensor.format}}</td>
+      <td>{{sensor.timeInterval}}</td>
+      <td>{{sensor.frequency}}</td>
+      <td>{{sensor.minRange + "-" + sensor.maxRange}}</td>
+      <td><button type="button" [routerLink]="['/sensors', sensor.name]" class=" btn btn-icon btn-primary"
+          aria-label="done">
+          <clr-icon shape="eye" class="is-solid"></clr-icon>
+        </button></td>
+      <td><button *ngIf="spinnerVisibility === false" type="button" class="btn btn-icon btn-success"
+          (click)="simulate(sensor['name'])" aria-label="done">
+          <clr-icon shape="play" class="is-solid"></clr-icon>
+        </button>
+        <div *ngIf="spinnerVisibility === true">
+          <span class="spinner spinner-inline spinner-md">loading...</span>
+          <span>Simulating...</span>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

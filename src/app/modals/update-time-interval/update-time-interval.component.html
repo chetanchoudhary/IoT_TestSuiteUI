@@ -1,0 +1,18 @@
+<clr-modal [(clrModalOpen)]="modalVisibility" [clrModalClosable]="false">
+  <h3 class="modal-title">Update Simulation's Time Interval</h3>
+  <div class="modal-body">
+    <form class="clr-form clr-form-horizontal">
+      <clr-input-container>
+        <label>Time Interval</label>
+        <input clrInput type="number" name="timeInterval" [(ngModel)]="timeInterval" required />
+        <clr-control-error>Time Interval Value required.</clr-control-error>
+
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="modalToggler()">Cancel</button>
+    <button type=" submit" class="btn btn-primary" (click)="updateTimeInterval()"
+      (click)="modalToggler()">Update</button>
+  </div>
+</clr-modal>

@@ -1,0 +1,17 @@
+<clr-modal [(clrModalOpen)]="modalVisibility" [clrModalClosable]="false">
+  <h3 class="modal-title">Update Simulation's Frequency</h3>
+  <div class="modal-body">
+    <form class="clr-form clr-form-horizontal">
+      <clr-input-container>
+        <label>Frequency</label>
+        <input clrInput type="number" name="frequency" [(ngModel)]="frequency" required />
+        <clr-control-error>Frequency Value required.</clr-control-error>
+
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="modalToggler()">Cancel</button>
+    <button type="submit" class="btn btn-primary" (click)="updateFrequency()" (click)="modalToggler()">Update</button>
+  </div>
+</clr-modal>

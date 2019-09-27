@@ -1,0 +1,80 @@
+<clr-modal [(clrModalOpen)]="modalVisibility" [clrModalClosable]="false">
+  <clr-alert *ngIf="message !== undefined" [clrAlertType]="'success'">
+    <clr-alert-item>
+      <span class="alert-text">
+        {{  message  }}
+      </span>
+    </clr-alert-item>
+  </clr-alert>
+  <h3 class="modal-title">Register a Sensor connected to Thingworx(PTC).</h3>
+  <div class="modal-body">
+    <form class="clr-form clr-form-horizontal" (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <clr-input-container>
+        <label>Name</label>
+        <input clrInput type="text" name="name" ngModel required />
+        <clr-control-error>Please enter a unique name for your sensor.</clr-control-error>
+
+      </clr-input-container>
+
+      <div ngModelGroup="connection">
+        <clr-input-container>
+          <label>App Key</label>
+          <input clrInput type="text" name="appKey" ngModel required />
+          <clr-control-error>Please enter Thingworx Appkey.</clr-control-error>
+
+        </clr-input-container>
+        <clr-input-container>
+          <label>Broker</label>
+          <input clrInput type="text" name="broker" ngModel required />
+          <clr-control-error>Please enter MQTT Broker.</clr-control-error>
+
+        </clr-input-container>
+        <clr-input-container>
+          <label>Topic</label>
+          <input clrInput type="text" name="topic" ngModel required />
+          <clr-control-error>Please enter MQTT Topic.</clr-control-error>
+
+        </clr-input-container>
+      </div>
+
+      <clr-select-container>
+        <label>Format</label>
+        <select clrSelect name="format" ngModel required>
+          <option value="json">JSON</option>
+        </select>
+      </clr-select-container>
+
+      <clr-input-container>
+        <label>Time Interval</label>
+        <input clrInput type="number" name="timeInterval" ngModel required />
+        <clr-control-error>Please enter Time Interval.</clr-control-error>
+
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Frequency</label>
+        <input clrInput type="number" name="frequency" ngModel required />
+        <clr-control-error>Please enter Frequency.</clr-control-error>
+
+      </clr-input-container>
+      <clr-input-container>
+        <label>Minimum Range</label>
+        <input clrInput type="number" name="minRange" ngModel required />
+        <clr-control-error>Please enter a minimum range.</clr-control-error>
+
+      </clr-input-container>
+      <clr-input-container>
+        <label>Maximum Range</label>
+        <input clrInput type="number" name="maxRange" ngModel required />
+        <clr-control-error>Please enter a maximum range.</clr-control-error>
+
+      </clr-input-container>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <button type="button" class="btn btn-outline" (click)="modalToggler()">Cancel</button>
+
+      </div>
+    </form>
+  </div>
+
+</clr-modal>

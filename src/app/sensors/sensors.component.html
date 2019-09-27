@@ -1,0 +1,40 @@
+<clr-stack-view>
+  <!-- <clr-stack-header>
+        <button class="stack-action btn btn-sm btn-link" (click)="resetChildren()" type="button">Reset</button>
+    </clr-stack-header> -->
+
+  <clr-stack-block #lazyBlock [clrSbExpandable]="true" (clrSbExpandedChange)="fetchSensors()">
+    <clr-stack-label>Sensors</clr-stack-label>
+    <clr-stack-content>View/Edit Sensors</clr-stack-content>
+
+    <clr-stack-block *ngIf="loadedSensors === undefined">
+      <div>Loading...</div>
+    </clr-stack-block>
+
+    <clr-stack-block *ngFor="let sensor of loadedSensors">
+      <clr-stack-label [routerLink]="['/sensors', sensor.name]">{{sensor.name}}</clr-stack-label>
+      <clr-stack-content>{{sensor.cloud}}</clr-stack-content>
+    </clr-stack-block>
+  </clr-stack-block>
+
+  <clr-stack-block>
+    <clr-stack-label>Cloud Services</clr-stack-label>
+    <clr-stack-content>Create new sensors</clr-stack-content>
+    <clr-stack-block>
+
+      <clr-stack-label (click)="modalVisibility = true">PTC Thingworx</clr-stack-label>
+
+      <clr-stack-content></clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block>
+      <clr-stack-label>Amazon Web Services</clr-stack-label>
+      <clr-stack-content></clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block>
+      <clr-stack-label>Microsoft Azure</clr-stack-label>
+      <clr-stack-content></clr-stack-content>
+    </clr-stack-block>
+  </clr-stack-block>
+</clr-stack-view>
+
+<app-add-ptcform [modalVisibility]="modalVisibility" (toggleModal)="toggleModal($event)"></app-add-ptcform>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddPTCSensorComponent } from './add-ptcsensor.component';
+import { UpdateRangeComponent } from './update-range.component';
 
-describe('AddPTCSensorComponent', () => {
-  let component: AddPTCSensorComponent;
-  let fixture: ComponentFixture<AddPTCSensorComponent>;
+describe('UpdateRangeComponent', () => {
+  let component: UpdateRangeComponent;
+  let fixture: ComponentFixture<UpdateRangeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddPTCSensorComponent ]
+      declarations: [ UpdateRangeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddPTCSensorComponent);
+    fixture = TestBed.createComponent(UpdateRangeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

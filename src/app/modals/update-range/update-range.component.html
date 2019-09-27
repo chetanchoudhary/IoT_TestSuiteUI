@@ -1,0 +1,24 @@
+<clr-modal [(clrModalOpen)]="modalVisibility" [clrModalClosable]="false">
+  <h3 class="modal-title">Update Simulation's value range</h3>
+  <div class="modal-body">
+    <form class="clr-form clr-form-horizontal">
+      <clr-input-container>
+        <label>Minimum</label>
+        <input clrInput type="number" name="minRange" [(ngModel)]="minRange" required />
+        <clr-control-error>Minimum Range Value required.</clr-control-error>
+
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Maximum</label>
+        <input clrInput type="number" name="maxRange" [(ngModel)]="maxRange" required />
+        <clr-control-error>Maximum Range Value required.</clr-control-error>
+
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="modalToggler()">Cancel</button>
+    <button type=" submit" class="btn btn-primary" (click)="updateRange()" (click)="modalToggler()">Update</button>
+  </div>
+</clr-modal>

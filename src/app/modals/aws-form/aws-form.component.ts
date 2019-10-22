@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { AddSensorResponse } from '../../models/addResponse';
 
 @Component({
-  selector: 'app-add-ptcform',
-  templateUrl: './add-ptcform.component.html',
-  styleUrls: ['./add-ptcform.component.css']
+  selector: 'app-aws-form',
+  templateUrl: './aws-form.component.html',
+  styleUrls: ['./aws-form.component.css']
 })
-export class AddPTCFormComponent implements OnInit {
+export class AwsFormComponent implements OnInit {
   @Input() modalVisibility: boolean;
   @Output() toggleModal = new EventEmitter();
 
@@ -32,7 +32,7 @@ export class AddPTCFormComponent implements OnInit {
 
     this.payload = {
       name: form.value.name,
-      cloud: 'thingworx',
+      cloud: 'aws',
       connection: JSON.stringify(form.value.connection),
       format: form.value.format,
       timeInterval: form.value.timeInterval,

@@ -1,0 +1,10 @@
+<clr-modal [(clrModalOpen)]="modalVisibility" [clrModalClosable]="false">
+  <h3 class="modal-title">Update Simulation's Frequency</h3>
+  <div class="modal-body">
+    <p>Are you sure you want to delete ?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="modalToggler()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="delete()" (click)="modalToggler()">Update</button>
+  </div>
+</clr-modal>

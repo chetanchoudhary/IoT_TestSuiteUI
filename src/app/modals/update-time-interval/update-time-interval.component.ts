@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { UpdateSensorResponse } from '../../models/updateResponse';
 
 @Component({
   selector: 'app-update-time-interval',
@@ -33,7 +34,7 @@ export class UpdateTimeIntervalComponent implements OnInit {
     console.log(this.timeInterval);
     const payload = { timeInterval: this.timeInterval };
     this.http
-      .put(
+      .put<UpdateSensorResponse>(
         'http://127.0.0.1:5000/api/v1/sensors/' + sensorName + '/timeInterval',
         payload
       )

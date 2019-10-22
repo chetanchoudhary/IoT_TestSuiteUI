@@ -22,12 +22,12 @@
     <clr-stack-content>Create new sensors</clr-stack-content>
     <clr-stack-block>
 
-      <clr-stack-label (click)="modalVisibility = true">PTC Thingworx</clr-stack-label>
+      <clr-stack-label (click)="ptcModalVisibility = true">PTC Thingworx</clr-stack-label>
 
       <clr-stack-content></clr-stack-content>
     </clr-stack-block>
     <clr-stack-block>
-      <clr-stack-label>Amazon Web Services</clr-stack-label>
+      <clr-stack-label (click)="awsModalVisibility=true">Amazon Web Services</clr-stack-label>
       <clr-stack-content></clr-stack-content>
     </clr-stack-block>
     <clr-stack-block>
@@ -37,4 +37,6 @@
   </clr-stack-block>
 </clr-stack-view>
 
-<app-add-ptcform [modalVisibility]="modalVisibility" (toggleModal)="toggleModal($event)"></app-add-ptcform>
+<app-add-ptcform [modalVisibility]="ptcModalVisibility" (toggleModal)="ptcToggleModal($event)"></app-add-ptcform>
+<app-add-ptcform-rx></app-add-ptcform-rx>
+<app-aws-form [modalVisibility]="awsModalVisibility" (toggleModal)="awsToggleModal($event)"></app-aws-form>

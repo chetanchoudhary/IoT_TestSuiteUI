@@ -1,0 +1,79 @@
+<clr-modal [(clrModalOpen)]="modalVisibility" [clrModalClosable]="false">
+
+  <h3 class="modal-title">Register a Sensor connected to Thingworx(PTC).</h3>
+  <div class="modal-body">
+    <form class="clr-form clr-form-horizontal" [formGroup]="ptcSensorForm" (ngSubmit)="onSubmit()">
+      <clr-input-container>
+        <label>Name</label>
+        <input clrInput type="text" name="name" formControlName="name" />
+        <clr-control-helper *ngIf="ptcSensorForm.get('name').valid">{{ ptcSensorForm.get('name').value }} is available
+        </clr-control-helper>
+        <clr-control-helper *ngIf="ptcSensorForm.get('name').pending">
+          Hold tight... Checking availability of {{ ptcSensorForm.get('name').value }}</clr-control-helper>
+
+        <clr-control-error>Please enter a unique name for your sensor.</clr-control-error>
+
+      </clr-input-container>
+
+      <div formGroupName="connection">
+        <clr-input-container>
+          <label>App Key</label>
+          <input clrInput type="text" name="appKey" formControlName="appKey" />
+          <clr-control-error>Please enter Thingworx Appkey.</clr-control-error>
+
+        </clr-input-container>
+        <clr-input-container>
+          <label>Broker</label>
+          <input clrInput type="text" name="broker" formControlName="broker" />
+          <clr-control-error>Please enter MQTT Broker.</clr-control-error>
+
+        </clr-input-container>
+        <clr-input-container>
+          <label>Topic</label>
+          <input clrInput type="text" name="topic" formControlName="topic" />
+          <clr-control-error>Please enter MQTT Topic.</clr-control-error>
+
+        </clr-input-container>
+      </div>
+
+      <clr-select-container>
+        <label>Format</label>
+        <select clrSelect name="format" formControlName="format">
+          <option value="json">JSON</option>
+        </select>
+      </clr-select-container>
+
+      <clr-input-container>
+        <label>Time Interval</label>
+        <input clrInput type="number" name="timeInterval" formControlName="timeInterval" />
+        <clr-control-error>Please enter Time Interval.</clr-control-error>
+
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Frequency</label>
+        <input clrInput type="number" name="frequency" formControlName="frequency" />
+        <clr-control-error>Please enter Frequency.</clr-control-error>
+
+      </clr-input-container>
+      <clr-input-container>
+        <label>Minimum Range</label>
+        <input clrInput type="number" name="minRange" formControlName="minRange" />
+        <clr-control-error>Please enter a minimum range.</clr-control-error>
+
+      </clr-input-container>
+      <clr-input-container>
+        <label>Maximum Range</label>
+        <input clrInput type="number" name="maxRange" formControlName="maxRange" />
+        <clr-control-error>Please enter a maximum range.</clr-control-error>
+
+      </clr-input-container>
+      <div class="modal-footer">
+        <button [disabled]="!ptcSensorForm.valid" class="btn btn-primary" type="submit">Submit</button>
+        <button type="button" class="btn btn-outline" (click)="modalToggler()">Cancel</button>
+
+      </div>
+    </form>
+  </div>
+
+</clr-modal>

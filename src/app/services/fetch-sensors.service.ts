@@ -7,9 +7,9 @@ import { HttpClient } from '@angular/common/http';
 export class FetchSensorsService {
   constructor(private http: HttpClient) {}
 
-  getAllSensors() {
-    this.http.get('http://127.0.0.1:5000/api/v1/sensors').subscribe(res => {
-      return res.sensors;
-    });
-  }
+  // getAllSensors() {
+  //   this.http.get('http://127.0.0.1:5000/api/v1/sensors').subscribe(res => {
+  //     return res.sensors;
+  //   });
+  // }
 }

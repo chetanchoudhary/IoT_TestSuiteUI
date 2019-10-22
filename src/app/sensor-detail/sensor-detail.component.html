@@ -28,6 +28,31 @@
     </div>
     <button class="btn  btn-danger" (click)="deleteSensor()">Delete</button>
   </div>
+  <div>
+
+    <form clrForm (ngSubmit)="onSubmitRootCA(rootCA)" #rootCA="ngForm">
+      <clr-input-container>
+        <label>Root CA</label>
+        <input clrInput type="file" name="rootCA" ngModel />
+      </clr-input-container>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <form clrForm (ngSubmit)="onSubmitPrivateKey(privateKey)" #privateKey="ngForm">
+      <clr-input-container>
+        <label>Private Key</label>
+        <input clrInput type="file" name="privateKey" ngModel />
+      </clr-input-container>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <form clrForm (ngSubmit)="onSubmitCertificate(certificate)" #certificate="ngForm">
+      <clr-input-container>
+        <label>Certificate</label>
+        <input clrInput type="file" name="certificate" ngModel />
+      </clr-input-container>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+
 </div>
 <app-update-frequency [modalVisibility]="frequencyModalVisibility" (toggleModal)="frequencyToggleModal($event)">
 </app-update-frequency>

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,9 @@ import { SensorDetailComponent } from './sensor-detail/sensor-detail.component';
 import { UpdateFrequencyComponent } from './modals/update-frequency/update-frequency.component';
 import { UpdateTimeIntervalComponent } from './modals/update-time-interval/update-time-interval.component';
 import { UpdateRangeComponent } from './modals/update-range/update-range.component';
+import { DeleteConfirmationComponent } from './modals/delete-confirmation/delete-confirmation.component';
+import { AddPTCFormRXComponent } from './modals/add-ptcform-rx/add-ptcform-rx.component';
+import { AwsFormComponent } from './modals/aws-form/aws-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { UpdateRangeComponent } from './modals/update-range/update-range.compone
     SensorDetailComponent,
     UpdateFrequencyComponent,
     UpdateTimeIntervalComponent,
-    UpdateRangeComponent
+    UpdateRangeComponent,
+    DeleteConfirmationComponent,
+    AddPTCFormRXComponent,
+    AwsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,8 @@ import { UpdateRangeComponent } from './modals/update-range/update-range.compone
     ClarityModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

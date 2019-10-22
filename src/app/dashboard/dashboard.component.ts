@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { SimulationResponse } from '../models/simulationResponse';
+import { AllSensorResponse } from '../models/getAllSensorResponse';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,15 +20,21 @@ export class DashboardComponent implements OnInit {
   }
 
   private fetchAllSensors() {
-    this.http.get('http://127.0.0.1:5000/api/v1/sensors').subscribe(res => {
-      this.loadedSensors = res.sensors;
-      console.log(this.loadedSensors);
-    });
+    this.http
+      .get<AllSensorResponse>('http://127.0.0.1:5000/api/v1/sensors')
+      .subscribe(res => {
+        this.loadedSensors = res.sensors;
+        // console.log(this.loadedSensors);
+        console.log(res);
+      });
   }
   simulate(sensorName: string) {
     this.spinnerVisibility = true;
     this.http
-      .post('http://127.0.0.1:5000/api/v1/sensors/' + sensorName, '')
+      .post<SimulationResponse>(
+        'http://127.0.0.1:5000/api/v1/sensors/' + sensorName,
+        ''
+      )
       .subscribe(res => {
         this.message = res.message;
         console.log(res);

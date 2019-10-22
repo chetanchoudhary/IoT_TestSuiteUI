@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { UpdateSensorResponse } from '../../models/updateResponse';
 
 @Component({
   selector: 'app-update-frequency',
@@ -34,7 +35,7 @@ export class UpdateFrequencyComponent implements OnInit {
     console.log(this.frequency);
     const payload = { frequency: this.frequency };
     this.http
-      .put(
+      .put<UpdateSensorResponse>(
         'http://127.0.0.1:5000/api/v1/sensors/' + sensorName + '/frequency',
         payload
       )

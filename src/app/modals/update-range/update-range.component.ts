@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { UpdateSensorResponse } from '../../models/updateResponse';
 
 @Component({
   selector: 'app-update-range',
@@ -34,7 +35,7 @@ export class UpdateRangeComponent implements OnInit {
 
     const payload = { minRange: this.minRange, maxRange: this.maxRange };
     this.http
-      .put(
+      .put<UpdateSensorResponse>(
         'http://127.0.0.1:5000/api/v1/sensors/' + sensorName + '/range',
         payload
       )

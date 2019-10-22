@@ -21,6 +21,11 @@ export class SensorDetailComponent implements OnInit {
   rangeModalVisibility: boolean;
   cloudName: string;
   payload: {};
+
+  selectedRootCAFile = null;
+  selectedPrivateKeyFile = null;
+  selectedCertificateFile = null;
+
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
@@ -74,63 +79,77 @@ export class SensorDetailComponent implements OnInit {
       });
   }
 
-  onSubmitRootCA(form: NgForm) {
-    console.log(form.value);
+  onRootCASelected(event) {
+    this.selectedRootCAFile = event.target.files[0];
+  }
+  onPrivateKeySelected(event) {
+    this.selectedPrivateKeyFile = event.target.files[0];
+  }
+  onCertificateSelected(event) {
+    this.selectedCertificateFile = event.target.files[0];
+  }
 
-    this.payload = {
-      rootCA: form.value.rootCA
-    };
+  onSubmitRootCA() {
+    const fd = new FormData();
+    fd.append(
+      'certificate',
+      this.selectedRootCAFile,
+      this.selectedRootCAFile.name
+    );
     this.http
       .post<AddSensorResponse>(
-        'http://127.0.0.1:5000/api/v1/' +
+        'http://127.0.0.1:5000/api/v1/sensors/' +
           this.loadedSensor.name +
           '/uploadCertificate',
-        this.payload
+        fd
       )
       .subscribe(response => {
         console.log(response);
         if (response.statusCode === 201) {
           this.message = response.message;
-          form.reset();
         }
       });
   }
 
-  onSubmitPrivateKey(form: NgForm) {
-    console.log(form.value);
-
-    this.payload = {
-      rootCA: form.value.rootCA
-    };
+  onSubmitPrivateKey() {
+    const fd = new FormData();
+    fd.append(
+      'certificate',
+      this.selectedPrivateKeyFile,
+      this.loadedSensor.name + '.private.key'
+    );
     this.http
       .post<AddSensorResponse>(
-        'http://127.0.0.1:5000/api/v1/uploadCertificate',
-        this.payload
+        'http://127.0.0.1:5000/api/v1/sensors/' +
+          this.loadedSensor.name +
+          '/uploadCertificate',
+        fd
       )
       .subscribe(response => {
         console.log(response);
         if (response.statusCode === 201) {
           this.message = response.message;
-          form.reset();
         }
       });
   }
-  onSubmitCertificate(form: NgForm) {
-    console.log(form.value);
-
-    this.payload = {
-      rootCA: form.value.rootCA
-    };
+  onSubmitCertificate() {
+    const fd = new FormData();
+    fd.append(
+      'certificate',
+      this.selectedCertificateFile,
+      this.loadedSensor.name + '.cert.pem'
+    );
     this.http
       .post<AddSensorResponse>(
-        'http://127.0.0.1:5000/api/v1/uploadCertificate',
-        this.payload
+        'http://127.0.0.1:5000/api/v1/sensors/' +
+          this.loadedSensor.name +
+          '/uploadCertificate',
+        fd
       )
       .subscribe(response => {
         console.log(response);
         if (response.statusCode === 201) {
           this.message = response.message;
-          form.reset();
         }
       });
   }

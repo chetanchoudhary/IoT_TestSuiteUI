@@ -30,27 +30,18 @@
   </div>
   <div>
 
-    <form clrForm (ngSubmit)="onSubmitRootCA(rootCA)" #rootCA="ngForm">
-      <clr-input-container>
-        <label>Root CA</label>
-        <input clrInput type="file" name="rootCA" ngModel />
-      </clr-input-container>
-      <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
-    <form clrForm (ngSubmit)="onSubmitPrivateKey(privateKey)" #privateKey="ngForm">
-      <clr-input-container>
-        <label>Private Key</label>
-        <input clrInput type="file" name="privateKey" ngModel />
-      </clr-input-container>
-      <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
-    <form clrForm (ngSubmit)="onSubmitCertificate(certificate)" #certificate="ngForm">
-      <clr-input-container>
-        <label>Certificate</label>
-        <input clrInput type="file" name="certificate" ngModel />
-      </clr-input-container>
-      <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
+    <clr-input-container>
+      <input clrInput type="file" name="rootCA" (change)="onRootCASelected($event)" />
+    </clr-input-container>
+    <button class="btn btn-primary" type="button" (click)="onSubmitRootCA()">Upload RootCA</button>
+    <clr-input-container>
+      <input clrInput type="file" name="privateKey" (change)="onPrivateKeySelected($event)" />
+    </clr-input-container>
+    <button class="btn btn-primary" type="button" (click)="onSubmitPrivateKey()">Upload Private Key</button>
+    <clr-input-container>
+      <input clrInput type="file" name="certificate" (change)="onCertificateSelected($event)" />
+    </clr-input-container>
+    <button class="btn btn-primary" type="button" (click)="onSubmitCertificate()">Upload Certificate</button>
   </div>
 
 </div>

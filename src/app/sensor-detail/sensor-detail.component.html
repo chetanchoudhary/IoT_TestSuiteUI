@@ -28,20 +28,43 @@
     </div>
     <button class="btn  btn-danger" (click)="deleteSensor()">Delete</button>
   </div>
-  <div>
+  <div *ngIf="cloudName === 'aws'">
+    <div *ngIf="rootCAExists === false">
+      <clr-input-container>
+        <input clrInput type="file" name="rootCA" (change)="onRootCASelected($event)" />
+      </clr-input-container>
+      <button class="btn btn-primary" type="button" (click)="onSubmitRootCA()">Upload RootCA</button>
+    </div>
+    <div *ngIf="rootCAExists === true">
+      <h3>Root CA is uploaded.</h3>
+      <button class="btn btn-sm btn-danger" type="button" (click)="deleteRootCA()">Delete</button>
+    </div>
 
-    <clr-input-container>
-      <input clrInput type="file" name="rootCA" (change)="onRootCASelected($event)" />
-    </clr-input-container>
-    <button class="btn btn-primary" type="button" (click)="onSubmitRootCA()">Upload RootCA</button>
-    <clr-input-container>
-      <input clrInput type="file" name="privateKey" (change)="onPrivateKeySelected($event)" />
-    </clr-input-container>
-    <button class="btn btn-primary" type="button" (click)="onSubmitPrivateKey()">Upload Private Key</button>
-    <clr-input-container>
-      <input clrInput type="file" name="certificate" (change)="onCertificateSelected($event)" />
-    </clr-input-container>
-    <button class="btn btn-primary" type="button" (click)="onSubmitCertificate()">Upload Certificate</button>
+    <div *ngIf="privateKeyExists === false">
+      <clr-input-container>
+        <input clrInput type="file" name="privateKey" (change)="onPrivateKeySelected($event)" />
+      </clr-input-container>
+      <button class="btn btn-primary" type="button" (click)="onSubmitPrivateKey()">Upload Private Key</button>
+    </div>
+    <div *ngIf="privateKeyExists === true">
+      <h3>Private Key is uploaded.</h3>
+      <button class="btn btn-sm btn-danger" type="button" (click)="deletePrivateKey()">Delete</button>
+    </div>
+
+
+    <div *ngIf="certificateExists === false">
+      <clr-input-container>
+        <input clrInput type="file" name="certificate" (change)="onCertificateSelected($event)" />
+      </clr-input-container>
+      <button class="btn btn-primary" type="button" (click)="onSubmitCertificate()">Upload Certificate</button>
+    </div>
+    <div *ngIf="certificateExists === true">
+      <h3>Certificate is uploaded.</h3>
+      <button class="btn btn-sm btn-danger" type="button" (click)="deleteCertificate()">Delete</button>
+    </div>
+
+
+
   </div>
 
 </div>

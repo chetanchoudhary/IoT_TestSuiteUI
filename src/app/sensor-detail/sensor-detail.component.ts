@@ -6,6 +6,7 @@ import { SimulationResponse } from '../models/simulationResponse';
 import { SensorDeleteResponse } from '../models/deleteResponse';
 import { NgForm } from '@angular/forms';
 import { AddSensorResponse } from '../models/addResponse';
+import { FileCheckResponse } from '../models/fileCheckResponse';
 
 @Component({
   selector: 'app-sensor-detail',
@@ -20,6 +21,9 @@ export class SensorDetailComponent implements OnInit {
   timeIntervalModalVisibility: boolean;
   rangeModalVisibility: boolean;
   cloudName: string;
+  rootCAExists: boolean;
+  privateKeyExists: boolean;
+  certificateExists: boolean;
   payload: {};
 
   selectedRootCAFile = null;
@@ -43,6 +47,11 @@ export class SensorDetailComponent implements OnInit {
         this.cloudName = res.cloud;
       });
     this.spinnerVisibility = false;
+    this.getCloud();
+    this.rootCAFileCheck();
+    this.certificateFileCheck();
+    this.privateKeyFileCheck();
+    console.log(this.rootCAExists);
   }
 
   frequencyToggleModal(modalVisibility: boolean) {
@@ -53,6 +62,15 @@ export class SensorDetailComponent implements OnInit {
   }
   rangeToggleModal(modalVisibility: boolean) {
     this.rangeModalVisibility = modalVisibility;
+  }
+
+  getCloud() {
+    const name = this.route.snapshot.params.name;
+    this.http
+      .get<SensorDetail>('http://127.0.0.1:5000/api/v1/sensors/' + name)
+      .subscribe(res => {
+        this.cloudName = res.cloud;
+      });
   }
   simulate() {
     this.spinnerVisibility = true;
@@ -107,6 +125,7 @@ export class SensorDetailComponent implements OnInit {
         console.log(response);
         if (response.statusCode === 201) {
           this.message = response.message;
+          this.rootCAFileCheck();
         }
       });
   }
@@ -129,6 +148,7 @@ export class SensorDetailComponent implements OnInit {
         console.log(response);
         if (response.statusCode === 201) {
           this.message = response.message;
+          this.privateKeyFileCheck();
         }
       });
   }
@@ -150,7 +170,75 @@ export class SensorDetailComponent implements OnInit {
         console.log(response);
         if (response.statusCode === 201) {
           this.message = response.message;
+          this.certificateFileCheck();
         }
+      });
+  }
+
+  rootCAFileCheck() {
+    const name = this.route.snapshot.params.name;
+    this.http
+      .get<FileCheckResponse>(
+        'http://127.0.0.1:5000/api/v1/sensors/' + name + '/rootCACheck'
+      )
+      .subscribe(res => {
+        this.rootCAExists = res.exists;
+      });
+  }
+
+  certificateFileCheck() {
+    const name = this.route.snapshot.params.name;
+    this.http
+      .get<FileCheckResponse>(
+        'http://127.0.0.1:5000/api/v1/sensors/' + name + '/certificateCheck'
+      )
+      .subscribe(res => {
+        this.certificateExists = res.exists;
+      });
+  }
+  privateKeyFileCheck() {
+    const name = this.route.snapshot.params.name;
+    this.http
+      .get<FileCheckResponse>(
+        'http://127.0.0.1:5000/api/v1/sensors/' + name + '/privateKeyCheck'
+      )
+      .subscribe(res => {
+        this.privateKeyExists = res.exists;
+      });
+  }
+
+  deleteRootCA() {
+    const name = this.route.snapshot.params.name;
+    this.http
+      .delete<SensorDeleteResponse>(
+        'http://127.0.0.1:5000/api/v1/sensors/' + name + '/rootCACheck'
+      )
+      .subscribe(res => {
+        this.message = res.message;
+        this.rootCAFileCheck();
+      });
+  }
+
+  deleteCertificate() {
+    const name = this.route.snapshot.params.name;
+    this.http
+      .delete<SensorDeleteResponse>(
+        'http://127.0.0.1:5000/api/v1/sensors/' + name + '/certificateCheck'
+      )
+      .subscribe(res => {
+        this.message = res.message;
+        this.certificateFileCheck();
+      });
+  }
+  deletePrivateKey() {
+    const name = this.route.snapshot.params.name;
+    this.http
+      .delete<SensorDeleteResponse>(
+        'http://127.0.0.1:5000/api/v1/sensors/' + name + '/privateKeyCheck'
+      )
+      .subscribe(res => {
+        this.message = res.message;
+        this.privateKeyFileCheck();
       });
   }
 }
